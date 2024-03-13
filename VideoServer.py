@@ -3,8 +3,9 @@ from PIL import ImageGrab
 from PIL import Image
 from io import BytesIO
 import time
+import struct
 
-server_ip = "10.0.0.135"
+server_ip = "192.168.1.59"
 server_port = 12000
 server_socket = socket(AF_INET, SOCK_STREAM)
 server_socket.bind((server_ip, server_port))
@@ -14,7 +15,12 @@ while True:
     client_socket, client_address = server_socket.accept()
     print("Request received")
     rec = client_socket.recv(2048)
-    imgQuality = 75
+    
+    #if rec.decode() != "Saysay12!":
+    #    print("Failed authentication")
+    #    continue
+    
+    imgQuality = 90
     
     try:
         while True:
@@ -26,8 +32,9 @@ while True:
             
             #print(len(bytes.getvalue()))
             
-            client_socket.send(bytes.getvalue() + b' end ')
-            #time.sleep(0.05)
+            client_socket.send(struct.pack("!I", len(bytes.getvalue())))
+            client_socket.send(bytes.getvalue())
+            time.sleep(0.016)
     except:
         print("closing connection")
         

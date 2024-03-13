@@ -5,7 +5,7 @@ from io import BytesIO
 import time
 import pyautogui
 
-server_ip = "10.0.0.135"
+server_ip = "192.168.1.59"
 server_port = 12001
 server_socket = socket(AF_INET, SOCK_STREAM)
 server_socket.bind((server_ip, server_port))
