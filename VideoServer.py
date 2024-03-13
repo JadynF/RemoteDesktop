@@ -14,7 +14,7 @@ while True:
     client_socket, client_address = server_socket.accept()
     print("Request received")
     rec = client_socket.recv(2048)
-    imgQuality = 90
+    imgQuality = 75
     
     try:
         while True:
@@ -27,10 +27,9 @@ while True:
             #print(len(bytes.getvalue()))
             
             client_socket.send(bytes.getvalue() + b' end ')
-            time.sleep(0.05)
+            #time.sleep(0.05)
     except:
         print("closing connection")
         
     client_socket.close()
-    
     
