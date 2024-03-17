@@ -9,8 +9,9 @@ import matplotlib.pyplot as plt
 import keyboard
 import pygetwindow
 import struct
+import threading
 
-serverIp = "192.168.1.59"
+serverIp = "10.0.0.236"
 skipTime = time.time()
 mouseMoveDelay = 0.1
 
@@ -64,14 +65,17 @@ def keyboardEvent(event):
         #print(f"keypress at: {event.name}")
         socket2 = socket(AF_INET, SOCK_STREAM)
         socket2.connect((serverIp, 12001))
-        message = f"kp {event.name}"
+        if (event.event_type == keyboard.KEY_DOWN):
+            message = f"kd {event.name}"
+        elif (event.event_type == keyboard.KEY_UP):
+            message = f"ku {event.name}"
         socket2.send(message.encode())
         socket2.close()
 
 def videoConnection():
     client_socket = socket(AF_INET, SOCK_STREAM)
     client_socket.connect((serverIp, 12000))
-    message = "Saysay12!"
+    message = "hello"
     
     client_socket.send(message.encode())
     
@@ -108,4 +112,5 @@ def main():
         videoConnection()
         
 main()
+
 

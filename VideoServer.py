@@ -5,7 +5,7 @@ from io import BytesIO
 import time
 import struct
 
-server_ip = "192.168.1.59"
+server_ip = "10.0.0.171"
 server_port = 12000
 server_socket = socket(AF_INET, SOCK_STREAM)
 server_socket.bind((server_ip, server_port))
@@ -20,10 +20,11 @@ while True:
     #    print("Failed authentication")
     #    continue
     
-    imgQuality = 90
+    imgQuality = 75
     
     try:
         while True:
+            #rec = client_socket.recv(2048)
             
             image = ImageGrab.grab()
             

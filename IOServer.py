@@ -5,7 +5,7 @@ from io import BytesIO
 import time
 import pyautogui
 
-server_ip = "192.168.1.59"
+server_ip = "10.0.0.171"
 server_port = 12001
 server_socket = socket(AF_INET, SOCK_STREAM)
 server_socket.bind((server_ip, server_port))
@@ -33,9 +33,12 @@ while True:
     elif (splitMessage[0] == "ru"):
         print(f"clicking right up: {splitMessage[1]}, {splitMessage[2]}")
         pyautogui.mouseUp(button = "right", x = int(splitMessage[1]), y = int(splitMessage[2]))
-    elif (splitMessage[0] == "kp"):
-        print(f"pressing key: {splitMessage[1]}")
-        pyautogui.press(splitMessage[1])
+    elif (splitMessage[0] == "kd"):
+        print(f"down key: {splitMessage[1]}")
+        pyautogui.keyDown(splitMessage[1])
+    elif (splitMessage[0] == "ku"):
+        print(f"up key: {splitMessage[1]}")
+        pyautogui.keyUp(splitMessage[1])
     elif (splitMessage[0] == "ms"):
         if (splitMessage[1] == "u"):
             print("scrolling up")
